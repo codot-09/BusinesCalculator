@@ -2,3 +2,4 @@ Flask>=2.3.2
 flasgger>=0.9.5
 PyJWT>=2.8.0
 Flask-SQLAlchemy>=3.0.3
+flask-cors
