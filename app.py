@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger, swag_from
 from service import AuthService, UserService, YukService, ChiqimService, StatisticsService
@@ -44,6 +44,11 @@ def token_required(f):
         kwargs['current_user'] = user
         return f(*args, **kwargs)
     return decorated
+
+# Root endpoint
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({'message': 'Welcome to BusinesCalculator API'})
 
 # Auth API
 @app.route('/api/auth/login', methods=['POST'])
@@ -337,6 +342,5 @@ def get_statistics(current_user):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    # Render uchun to'g'ri host va port
-    port = int(os.environ.get('PORT', 10000))  # Render default port: 10000
+    port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port, debug=True)
