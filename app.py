@@ -4,6 +4,7 @@ from flasgger import Swagger, swag_from
 from service import AuthService, UserService, YukService, ChiqimService, StatisticsService
 from entity import db
 from functools import wraps
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -336,4 +337,6 @@ def get_statistics(current_user):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    # Render uchun to'g'ri host va port
+    port = int(os.environ.get('PORT', 10000))  # Render default port: 10000
+    app.run(host='0.0.0.0', port=port, debug=True)
