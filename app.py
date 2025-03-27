@@ -5,8 +5,11 @@ from service import AuthService, UserService, YukService, ChiqimService, Statist
 from entity import db
 from functools import wraps
 import os
+from flask_cors import CORS  # CORS qo'shildi
 
 app = Flask(__name__)
+CORS(app)  # CORS barcha endpointlarga ruxsat beradi
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SWAGGER'] = {
     'title': 'API Hujjatlashtirish',
